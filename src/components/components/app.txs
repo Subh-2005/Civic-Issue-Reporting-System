@@ -1,0 +1,1 @@
+import OcrReader from "./components/OcrReader";
