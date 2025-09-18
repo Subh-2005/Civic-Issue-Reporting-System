@@ -206,7 +206,7 @@ const Login = () => {
     role: "citizen" | "admin"
   ) => {
     if (role !== "citizen") {
-      throw new Error("Only citizen login is supported in this MVP.");
+      throw new Error("This Mail is not supported for Admin login.");
     }
     const { error } = await supabase.auth.signInWithPassword({
       email,

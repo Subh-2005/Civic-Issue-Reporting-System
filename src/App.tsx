@@ -19,6 +19,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Chatbot from "@/components/Home/Chatbot";
 import AdminLogin from "./pages/AdminLogin";
 
+
 const queryClient = new QueryClient();
 
 const App = () => (

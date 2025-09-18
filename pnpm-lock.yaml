@@ -197,6 +197,9 @@ importers:
       twilio:
         specifier: ^5.9.0
         version: 5.9.0
+      unicornstudio-react:
+        specifier: ^1.4.30
+        version: 1.4.30(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vaul:
         specifier: ^0.9.9
         version: 0.9.9(@types/react-dom@18.3.7(@types/react@18.3.24))(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4104,6 +4107,17 @@ packages:
 
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
+  unicornstudio-react@1.4.30:
+    resolution: {integrity: sha512-KGSou7w5T60cfY14HZPHnzCbiEf/30HMu6WAmyGdS5QC6m0rtM1p5BQFO82O4UVe9RHEq8krgN1jJGlga/9/3A==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      next: '*'
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+    peerDependenciesMeta:
+      next:
+        optional: true
 
   unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
@@ -8490,6 +8504,11 @@ snapshots:
   undici-types@6.19.8: {}
 
   undici-types@6.21.0: {}
+
+  unicornstudio-react@1.4.30(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   unpipe@1.0.0: {}
 
