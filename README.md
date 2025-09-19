@@ -56,8 +56,8 @@ Civic Pulse is a web application designed to **promote and facilitate clean and 
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/sumandey7684/civic-pulse-94
-    cd civic-pulse-94
+    git clone https://github.com/swaraj06643/civic-report
+    cd civic-report
     ```
 
 2.  **Install dependencies:**
