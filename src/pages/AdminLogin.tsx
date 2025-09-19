@@ -1,3 +1,4 @@
+// src/pages/AdminLogin.tsx
 import React, { useState } from "react";
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
@@ -24,49 +25,67 @@ const AdminLogin: React.FC = () => {
     setLoading(true);
 
     try {
-      // Step 1: Check if profile exists and is admin
-      const { data: profile, error: fetchError } = await (supabase as any)
+      // Basic client-side validation
+      if (!formData.email || !formData.password) {
+        setError("Please enter both email and password.");
+        setLoading(false);
+        return;
+      }
+
+      // 1) Verify profile exists and is admin
+      const { data: profileData, error: profileError } = await supabase
         .from("profiles")
         .select("role")
         .eq("email", formData.email)
         .maybeSingle();
 
-      if (fetchError || !profile) {
-        setError("Account not found.");
+      if (profileError) {
+        console.error("Profile fetch error:", profileError);
+        setError("Unable to verify account. Try again.");
         setLoading(false);
         return;
       }
 
-      if ((profile as any).role !== "admin") {
-        setError("This account exists as a citizen and cannot be used for admin.");
+      if (!profileData) {
+        setError("Account not found. Please register or check the email.");
         setLoading(false);
         return;
       }
 
-      // Step 2: Authenticate with Supabase
+      // profileData may be typed as 'any' depending on your DB typings
+      const role = (profileData as any)?.role;
+      if (role !== "admin") {
+        setError("This account is not an admin account.");
+        setLoading(false);
+        return;
+      }
+
+      // 2) Authenticate with Supabase
+      // Note: supabase.auth.signInWithPassword returns { data, error } in supabase-js v2
       const { error: authError } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
-      });
+      } as { email: string; password: string });
 
       if (authError) {
-        setError(authError.message || "Invalid credentials");
+        console.error("Auth error:", authError);
+        setError(authError.message || "Invalid credentials.");
         setLoading(false);
         return;
       }
 
-      // Step 3: Navigate to Admin dashboard
-      navigate("/admin");
+      // 3) Successful login -> redirect to /account (immersive page)
+      navigate("/account");
     } catch (err) {
-      console.error(err);
-      setError("Something went wrong. Please try again.");
+      console.error("Unexpected error:", err);
+      setError("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-  <div className="min-h-screen bg-white text-black dark:bg-dark-blue-gradient dark:text-white">
+    <div className="min-h-screen bg-white text-black dark:bg-dark-blue-gradient dark:text-white">
       <Header />
       <main className="pt-20 pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-md">
@@ -80,9 +99,7 @@ const AdminLogin: React.FC = () => {
                   type="email"
                   placeholder="Admin Email"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData((f) => ({ ...f, email: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))}
                   required
                   disabled={loading}
                 />
@@ -90,9 +107,7 @@ const AdminLogin: React.FC = () => {
                   type="password"
                   placeholder="Password"
                   value={formData.password}
-                  onChange={(e) =>
-                    setFormData((f) => ({ ...f, password: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((f) => ({ ...f, password: e.target.value }))}
                   required
                   disabled={loading}
                 />
@@ -100,6 +115,7 @@ const AdminLogin: React.FC = () => {
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? "Signing In..." : "Sign In"}
                 </Button>
+
                 <div className="text-center mt-4">
                   <button
                     type="button"

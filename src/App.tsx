@@ -1,9 +1,11 @@
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/Theme/ThemeProvider";
+
 import Index from "./pages/Index";
 import MapExplorer from "./pages/MapExplorer";
 import ReportIssue from "./pages/ReportIssue";
@@ -18,34 +20,48 @@ import Account from "./pages/Account";
 import ResetPassword from "./pages/ResetPassword";
 import Chatbot from "@/components/Home/Chatbot";
 import AdminLogin from "./pages/AdminLogin";
-
+import SettingsPage from "./pages/SettingsPage";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const App: React.FC = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <TooltipProvider>
+        {/* Toasts / Notifications */}
         <Toaster />
         <Sonner />
+
+        {/* Router */}
         <BrowserRouter>
           <Routes>
+            {/* Public Pages */}
             <Route path="/" element={<Index />} />
             <Route path="/report" element={<ReportIssue />} />
             <Route path="/map" element={<MapExplorer />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+            {/* Admin */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin-login" element={<AdminLogin />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+            {/* Account / User */}
             <Route path="/account" element={<Account />} />
+            <Route path="/account/settings" element={<SettingsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+
+            {/* Extra Pages */}
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+
+            {/* Catch-all */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-          {/* Civic chatbot rendered globally */}
+
+          {/* Global Chatbot */}
           <Chatbot />
         </BrowserRouter>
       </TooltipProvider>

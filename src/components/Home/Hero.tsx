@@ -38,7 +38,10 @@ export const Hero = () => {
 
   return (
     <>
-  <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white text-black dark:bg-gradient-to-br dark:from-[#0a0a23] dark:to-[#1e3a8a] dark:text-white">
+      <section
+        className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-white text-black dark:bg-gradient-to-br dark:from-[#0a0a23] dark:to-[#1e3a8a] dark:text-white"
+        aria-label="Hero section"
+      >
         {/* Animated Background */}
         <div className="absolute inset-0 gradient-hero opacity-10" />
         <div className="absolute inset-0">
@@ -64,6 +67,7 @@ export const Hero = () => {
             opacity: [0.3, 0.6, 0.3],
           }}
           transition={{ duration: 4, repeat: Infinity }}
+          aria-hidden="true"
         />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -114,10 +118,12 @@ export const Hero = () => {
                   className="glass-effect rounded-2xl p-8 border border-primary/20 hover:border-primary/40 transition-all duration-300"
                   whileHover={{ scale: 1.02, y: -5 }}
                   whileTap={{ scale: 0.98 }}
+                  role="region"
+                  aria-label="Citizen Portal"
                 >
                   <div className="text-center">
                     <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Users className="w-8 h-8 text-blue-600" />
+                      <Users className="w-8 h-8 text-blue-600" aria-hidden="true" />
                     </div>
                     <h3 className="text-2xl font-bold text-foreground mb-4">
                       Citizen Portal
@@ -125,17 +131,18 @@ export const Hero = () => {
 
                     <div className="space-y-2 text-sm text-muted-foreground mb-8 text-left">
                       <div className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" aria-hidden="true" />
                         Report civic issues with photos and location
                       </div>
                       <div className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" aria-hidden="true" />
                         Track status of your reports
                       </div>
                     </div>
                     <Button
                       className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 text-lg font-semibold"
                       onClick={() => navigate("/report")}
+                      aria-label="Continue as Citizen"
                     >
                       Continue as Citizen
                     </Button>
@@ -147,27 +154,30 @@ export const Hero = () => {
                   className="glass-effect rounded-2xl p-8 border border-green-500/20 hover:border-green-500/40 transition-all duration-300"
                   whileHover={{ scale: 1.02, y: -5 }}
                   whileTap={{ scale: 0.98 }}
+                  role="region"
+                  aria-label="Admin Dashboard"
                 >
                   <div className="text-center">
                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Shield className="w-8 h-8 text-green-600" />
+                      <Shield className="w-8 h-8 text-green-600" aria-hidden="true" />
                     </div>
                     <h3 className="text-2xl font-bold text-foreground mb-4">
                       Admin Dashboard
                     </h3>
                     <div className="space-y-2 text-sm text-muted-foreground mb-8 text-left">
                       <div className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" aria-hidden="true" />
                         View and manage all reported issues
                       </div>
                       <div className="flex items-center">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" aria-hidden="true" />
                         Track resolution progress and analytics
                       </div>
                     </div>
                     <Button
                       className="w-full bg-green-600 hover:bg-green-700 text-white py-4 text-lg font-semibold"
                       onClick={() => navigate("/admin")}
+                      aria-label="Continue as Admin"
                     >
                       Continue as Admin
                     </Button>
@@ -182,6 +192,7 @@ export const Hero = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, delay: 0.4 }}
               className="relative"
+              aria-label="How It Works"
             >
               <div className="glass-effect rounded-3xl p-10 shadow-[var(--shadow-elevated)]">
                 <h3 className="text-3xl font-bold text-foreground mb-8 text-center">
@@ -202,11 +213,12 @@ export const Hero = () => {
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 1 + index * 0.2, duration: 0.6 }}
+                      role="listitem"
                     >
                       <div
                         className={`h-16 w-16 rounded-2xl bg-${step.color}/20 flex items-center justify-center`}
                       >
-                        <step.icon className={`h-8 w-8 text-${step.color}`} />
+                        <step.icon className={`h-8 w-8 text-${step.color}`} aria-hidden="true" />
                       </div>
                       <h4 className="font-bold text-foreground text-lg">
                         {step.title}
@@ -227,6 +239,8 @@ export const Hero = () => {
           multiple
           accept="image/*,video/*"
           className="hidden"
+          aria-hidden="true"
+          tabIndex={-1}
         />
 
         <FloatingActionButton className="lg:hidden" />

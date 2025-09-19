@@ -29,25 +29,76 @@ const CitizenSignup = () => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    // Check if email already exists as admin
-    const { data: profile, error: fetchError } = await (supabase as any)
-      .from("profiles")
-      .select("role")
-      .eq("email", formData.email)
-      .maybeSingle();
-    if (fetchError) {
-      setError("Error checking account.");
+
+    try {
+      // Check if email already exists as admin
+      const { data: profile, error: fetchError } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("email", formData.email)
+        .maybeSingle();
+
+      if (fetchError) {
+        setError("Error checking account.");
+        setLoading(false);
+        return;
+      }
+
+      if (profile && profile.role === "admin") {
+        setError("This email is already registered as an admin.");
+        setLoading(false);
+        return;
+      }
+
+      // Sign up the user with Supabase
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (signUpError) {
+        setError(signUpError.message);
+        setLoading(false);
+        return;
+      }
+
+      if (authData.user) {
+        // Create profile entry
+        const { error: profileError } = await supabase
+          .from("profiles")
+          .insert({
+            id: authData.user.id,
+            name: formData.name,
+            email: formData.email,
+            role: "citizen",
+          });
+
+        if (profileError) {
+          console.error("Error creating profile:", profileError);
+          setError("Account created but profile setup failed. Please contact support.");
+          setLoading(false);
+          return;
+        }
+
+        // Automatically sign in after signup
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (signInError) {
+          setError("Signup successful, but auto-login failed. Please log in manually.");
+          navigate("/login");
+        } else {
+          // Redirect to account page
+          navigate("/account");
+        }
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
       setLoading(false);
-      return;
     }
-    if (profile && profile.role === "admin") {
-      setError("This email is already registered as an admin.");
-      setLoading(false);
-      return;
-    }
-    // TODO: integrate API for citizen signup
-    navigate("/login"); // redirect to login after signup
-    setLoading(false);
   };
 
   return (

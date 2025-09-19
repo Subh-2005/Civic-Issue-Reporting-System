@@ -180,6 +180,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-inter antialiased;
+    scroll-behavior: smooth;
   }
 
   /* Government Typography */
