@@ -22,16 +22,51 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowLeft, Upload, Camera, MapPin } from "lucide-react";
+import { ArrowLeft, Upload, Camera, MapPin, LogIn, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 const ReportIssue = () => {
+  // Authentication state
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
   // Voice Assistant State
   const [isListening, setIsListening] = useState(false);
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const recognitionRef = useRef<any>(null);
+
+  // Leaderboard dialog state and data
+  const [leaderboardOpen, setLeaderboardOpen] = useState(false);
+  const [leaderboardData, setLeaderboardData] = useState<{ id: string; name: string; count: number }[]>([]);
+
+  // Check authentication status
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      setLoading(false);
+    };
+
+    checkAuth();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   // Voice Assistant Handler
   const handleVoiceCall = () => {
@@ -66,6 +101,55 @@ const ReportIssue = () => {
       setIsListening(false);
     }
   };
+
+  // Fetch leaderboard data function
+  const fetchLeaderboard = async () => {
+    const { data, error } = await supabase
+      .from("issues")
+      .select("user_id")
+      .limit(10);
+
+    if (error) {
+      toast({ title: "Error fetching leaderboard", description: error.message });
+      return;
+    }
+
+    // Group by user_id and count
+    const userCounts: { [key: string]: number } = {};
+    data?.forEach((issue: any) => {
+      if (issue.user_id) {
+        userCounts[issue.user_id] = (userCounts[issue.user_id] || 0) + 1;
+      }
+    });
+
+    // Get user profiles
+    const userIds = Object.keys(userCounts);
+    const { data: profiles, error: profileError } = await supabase
+      .from("profiles")
+      .select("id, name")
+      .in("id", userIds);
+
+    if (profileError) {
+      toast({ title: "Error fetching profiles", description: profileError.message });
+      return;
+    }
+
+    // Combine data
+    const leaderboard = profiles?.map((profile: any) => ({
+      id: profile.id,
+      name: profile.name || "Unknown",
+      count: userCounts[profile.id] || 0,
+    })).sort((a, b) => b.count - a.count) || [];
+
+    setLeaderboardData(leaderboard);
+  };
+
+  useEffect(() => {
+    if (leaderboardOpen) {
+      fetchLeaderboard();
+    }
+  }, [leaderboardOpen]);
+
   const [issues, setIssues] = useState([]);
   const [cameraLoading, setCameraLoading] = useState(false);
   useEffect(() => {
@@ -218,11 +302,160 @@ const ReportIssue = () => {
     }, 2000);
   };
 
+  // Show loading spinner while checking auth
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white text-black dark:bg-dark-blue-gradient dark:text-white">
+        <Header />
+        <main className="pt-20 pb-12">
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Show login prompt if user is not authenticated
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-white text-black dark:bg-dark-blue-gradient dark:text-white">
+        <Header />
+        <main className="pt-20 pb-12">
+          <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-12">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="flex items-center gap-4 mb-6"
+              >
+                <Button
+                  variant="outline"
+                  onClick={() => navigate("/")}
+                  className="btn-framer-ghost"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Home
+                </Button>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-center"
+              >
+                <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-4">
+                  Report Civic Issue
+                </h1>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                  Help improve your community by reporting civic issues. Your
+                  reports help authorities prioritize and resolve problems faster.
+                </p>
+              </motion.div>
+            </div>
+          </section>
+
+          <section className="py-16">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-center"
+              >
+                <Card className="glass-effect border-0 shadow-[var(--shadow-elevated)]">
+                  <CardHeader className="text-center space-y-4">
+                    <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                      <LogIn className="h-10 w-10 text-primary" />
+                    </div>
+                    <CardTitle className="text-2xl">Please Login First</CardTitle>
+                    <CardDescription className="text-lg">
+                      Please login first and report then for better functionality.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-muted-foreground">
+                      To report civic issues and contribute to your community, you need to be logged in.
+                      This helps us track contributions and show you on the leaderboard.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button
+                        className="btn-framer-primary"
+                        onClick={() => navigate("/login")}
+                      >
+                        <LogIn className="mr-2 h-4 w-4" />
+                        Login to Report
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="btn-framer-ghost"
+                        onClick={() => navigate("/")}
+                      >
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        Back to Home
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
   <div className="min-h-screen bg-white text-black dark:bg-dark-blue-gradient dark:text-white">
     <Header />
     <main className="pt-20 pb-12">
       <div className="container mx-auto px-4 py-8">
+        {/* Leaderboard button centered at top */}
+        <div className="flex justify-center mb-4">
+          <Dialog open={leaderboardOpen} onOpenChange={setLeaderboardOpen}>
+          <DialogTrigger asChild>
+            <Button
+              className="transform transition-all duration-200 active:scale-95 hover:scale-105 hover:shadow-lg bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold px-6 py-3 rounded-full border-2 border-yellow-400 shadow-md"
+            >
+              🏆 Leaderboard
+            </Button>
+          </DialogTrigger>
+          <DialogContent
+            className="backdrop-blur-md bg-white/20 border border-white/30 shadow-2xl rounded-2xl bg-gradient-to-br from-white/25 to-white/10"
+          >
+            <DialogHeader>
+              <DialogTitle>Top Contributors</DialogTitle>
+              <DialogDescription>
+                Based on report submissions from accounts.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-2 max-h-96 overflow-y-auto mt-4">
+              {leaderboardData.length === 0 ? (
+                <p className="text-muted-foreground">No data available.</p>
+              ) : (
+                leaderboardData.map((user, index) => (
+                  <div key={user.id} className="flex justify-between border-b border-muted-foreground/20 py-2">
+                    <span>{user.name}</span>
+                    <span className="font-semibold">{user.count}</span>
+                  </div>
+                ))
+              )}
+            </div>
+            <DialogClose asChild>
+              <Button variant="outline" className="mt-4 w-full">
+                Close
+              </Button>
+            </DialogClose>
+          </DialogContent>
+          </Dialog>
+        </div>
+
         {/* Report Issue Header with Voice Assistant on right */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">Reported Issues</h2>
@@ -695,5 +928,6 @@ const ReportIssue = () => {
     <Footer />
   </div>
   );
-}
+};
+
 export default ReportIssue;
