@@ -10,7 +10,7 @@
 
 Civic Pulse is a web application designed to **promote and facilitate clean and green initiatives within Jharkhand**. Built for SIH 2025, it provides a platform for citizens and government officials to **collaborate on environmental projects, track progress 📊, and access resources related to sustainable development**. This project utilizes a modern tech stack (⚛️ React, 🟦 TypeScript, ⚡ Vite) to ensure performance, scalability, and a smooth user experience, aligning with the vision of a cleaner, greener Jharkhand.
 
-❤️ **Repository URL:** [https://github.com/sumandey7684/civic-pulse-94](https://github.com/sumandey7684/civic-pulse-94)
+
 
 ## 🚀 Features
 
@@ -56,8 +56,8 @@ Civic Pulse is a web application designed to **promote and facilitate clean and 
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/sumandey7684/civic-pulse-94
-    cd civic-pulse-94
+    git clone https://github.com/swaraj06643/civic-report.git
+    cd civic-report
     ```
 
 2.  **Install dependencies:**
