@@ -1,4 +1,6 @@
-import React from "react";
+import WelcomeModal from "./components/WelcomeModal";
+import PrivacyPolicyModal from "./components/PrivacyPolicyModal";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -28,6 +30,7 @@ const App: React.FC = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <TooltipProvider>
+        <WelcomeModal />
         {/* Toasts / Notifications */}
         <Toaster />
         <Sonner />
