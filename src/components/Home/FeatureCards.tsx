@@ -67,14 +67,14 @@ const colorMap = {
 
 export const FeatureCards = () => {
   return (
-    <section className="py-16 lg:py-24 bg-muted/30">
+    <section className="py-20 lg:py-32 bg-gradient-to-b from-muted/30 to-background/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center space-y-4 mb-16"
+          className="text-center space-y-6 mb-20"
         >
           <Badge className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
             ⚡ Platform Features
@@ -90,7 +90,7 @@ export const FeatureCards = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -98,23 +98,24 @@ export const FeatureCards = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="flex"
             >
-              <Card className="card-civic h-full hover:scale-105 transition-all duration-300 group">
-                <CardHeader className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className={`h-12 w-12 rounded-xl ${colorMap[feature.color as keyof typeof colorMap]} flex items-center justify-center group-hover:scale-110 transition-transform duration-200`}>
-                      <feature.icon className="h-6 w-6" />
+              <Card className="card-civic h-full w-full hover:scale-[1.02] hover:shadow-xl transition-all duration-300 group border-0 shadow-lg bg-card/50 backdrop-blur-sm">
+                <CardHeader className="space-y-4 pb-4">
+                  <div className="flex items-start justify-between">
+                    <div className={`h-14 w-14 rounded-2xl ${colorMap[feature.color as keyof typeof colorMap]} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-sm`}>
+                      <feature.icon className="h-7 w-7" />
                     </div>
-                    <Badge className={colorMap[feature.color as keyof typeof colorMap]}>
+                    <Badge className={`${colorMap[feature.color as keyof typeof colorMap]} font-medium px-3 py-1`}>
                       {feature.badge}
                     </Badge>
                   </div>
-                  <CardTitle className="text-xl font-semibold text-foreground">
+                  <CardTitle className="text-xl font-bold text-foreground leading-tight">
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground leading-relaxed">
+                <CardContent className="pt-0">
+                  <CardDescription className="text-muted-foreground leading-relaxed text-base">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
@@ -123,49 +124,7 @@ export const FeatureCards = () => {
           ))}
         </div>
 
-        {/* Process Timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <div className="text-center mb-12">
-            <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
-              Streamlined Resolution Process
-            </h3>
-            <p className="text-muted-foreground">
-              From report to resolution in record time
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { icon: Camera, title: "Report", desc: "Citizen reports issue", time: "< 2 min" },
-              { icon: Zap, title: "Process", desc: "AI categorization & routing", time: "< 1 min" },
-              { icon: Users, title: "Assign", desc: "Department assignment", time: "< 1 hour" },
-              { icon: Award, title: "Resolve", desc: "Issue resolution", time: "< 7 days" }
-            ].map((step, index) => (
-              <div key={step.title} className="text-center">
-                <div className="relative">
-                  <div className="h-16 w-16 rounded-full bg-primary/10 border-2 border-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <step.icon className="h-8 w-8 text-primary" />
-                  </div>
-                  {index < 3 && (
-                    <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-primary/20"></div>
-                  )}
-                </div>
-                <h4 className="font-semibold text-foreground mb-2">{step.title}</h4>
-                <p className="text-sm text-muted-foreground mb-2">{step.desc}</p>
-                <Badge className="bg-success/10 text-success border-success/20">
-                  <Clock className="h-3 w-3 mr-1" />
-                  {step.time}
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

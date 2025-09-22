@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 
 export const CTA = () => {
   return (
-    <section className="py-24 bg-gradient-to-br from-primary/10 via-background to-secondary/10 relative overflow-hidden">
+    <section className="py-28 lg:py-36 bg-gradient-to-br from-primary/10 via-background to-secondary/10 relative overflow-hidden">
       {/* Animated Background Elements */}
       <motion.div
         className="absolute top-0 left-0 w-full h-full opacity-30"

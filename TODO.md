@@ -1,6 +1,0 @@
-- [ ] Add Dialog imports to ReportIssue.tsx
-- [ ] Add state for leaderboard dialog open/close and data
-- [ ] Add function to fetch leaderboard data from supabase
-- [ ] Add Leaderboard button at top center of the page
-- [ ] Add Dialog component with frosted glass effect
-- [ ] Display leaderboard list in the dialog
