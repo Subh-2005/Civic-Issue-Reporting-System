@@ -89,8 +89,8 @@ const Chatbot = () => {
           className="fixed bottom-6 right-6 w-80 flex flex-col z-50 transition-all duration-300 rounded-3xl"
           style={{
             background: "linear-gradient(135deg, rgba(255,255,255,0.55), rgba(244,244,255,0.35))",
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
             border: "1px solid rgba(255,255,255,0.25)",
             boxShadow: "0 12px 40px rgba(31,38,135,0.28)",
           }}

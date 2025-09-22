@@ -132,6 +132,8 @@ const NavigationMenuIndicator = React.forwardRef<
   </NavigationMenuPrimitive.Indicator>
 ));
 NavigationMenuIndicator.displayName = NavigationMenuPrimitive.Indicator.displayName;
+export default NavigationMenu;
+
 
 export {
   NavigationMenu,

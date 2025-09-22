@@ -27,15 +27,44 @@ const WelcomeModal: React.FC = () => {
     if (!accepted) return;
     setShowPrivacy(false);
     sessionStorage.setItem("hasAcceptedPrivacy", "true");
-    // ✅ Now user fully enters the site
   };
+
+  // 🌸 Generate petals when welcome modal is open
+  useEffect(() => {
+    if (showWelcome) {
+      const container = document.querySelector(".blossom-container");
+      if (!container) return;
+
+      const interval = setInterval(() => {
+        const petal = document.createElement("div");
+        petal.className = "blossom";
+
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.width = 10 + Math.random() * 20 + "px";
+        petal.style.height = petal.style.width;
+        petal.style.animationDuration = 4 + Math.random() * 4 + "s";
+        petal.style.opacity = (0.5 + Math.random() * 0.5).toString();
+
+        container.appendChild(petal);
+
+        // remove after animation ends
+        setTimeout(() => petal.remove(), 8000);
+      }, 500);
+
+      return () => clearInterval(interval);
+    }
+  }, [showWelcome]);
 
   return (
     <>
       {/* Welcome Modal */}
       {showWelcome && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-gradient-to-r from-pink-500 to-yellow-500 p-1 rounded-lg shadow-2xl animate-fade-in-down w-[90%] max-w-lg">
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md flex items-center justify-center z-50 overflow-hidden">
+          {/* 🌸 Blossom Layer */}
+          <div className="absolute inset-0 pointer-events-none blossom-container"></div>
+
+          {/* Modal */}
+          <div className="relative bg-gradient-to-r from-pink-500 to-yellow-500 p-1 rounded-lg shadow-2xl animate-fade-in-down w-[90%] max-w-lg z-10">
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg text-center space-y-6">
               <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500">
                 Welcome to Civic Report 🏦
@@ -58,24 +87,25 @@ const WelcomeModal: React.FC = () => {
 
       {/* Privacy Policy Modal */}
       {showPrivacy && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md flex items-center justify-center z-50">
           <div className="bg-gradient-to-r from-blue-500 to-green-500 p-1 rounded-lg shadow-2xl animate-fade-in-down w-[90%] max-w-lg">
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg text-center space-y-6">
               <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500">
                 Privacy Policy
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-h-48 overflow-y-auto">
-                <ol>
-  <li>
-    By using Civic Report, you agree to the collection and use of your information 
-    in accordance with this policy. Your data will only be used for improving 
-    community services and will not be shared with unauthorized parties.
-  </li>
-  <li>
-    Please review carefully before proceeding. Otherwise, action will be taken against you.
-  </li>
-</ol>
-
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-h-48 overflow-y-auto text-left">
+                <ol className="list-decimal list-inside space-y-2">
+                  <li>
+                    By using Civic Report, you agree to the collection and use
+                    of your information in accordance with this policy. Your
+                    data will only be used for improving community services and
+                    will not be shared with unauthorized parties.
+                  </li>
+                  <li>
+                    Please review carefully before proceeding. Otherwise, action
+                    will be taken against you.
+                  </li>
+                </ol>
               </p>
 
               <div className="flex items-center justify-center gap-2">
