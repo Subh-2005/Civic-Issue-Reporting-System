@@ -1,0 +1,107 @@
+{
+  "common": {
+    "home": "होम",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क",
+    "login": "लॉगिन",
+    "signup": "साइन अप",
+    "logout": "लॉग आउट",
+    "dashboard": "डैशबोर्ड",
+    "settings": "सेटिंग्स",
+    "profile": "प्रोफ़ाइल",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "submit": "सबमिट करें",
+    "edit": "संपादित करें",
+    "delete": "मिटाएं",
+    "search": "खोजें",
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफलता",
+    "warning": "चेतावनी",
+    "info": "जानकारी"
+  },
+  "navigation": {
+    "home": "होम",
+    "report": "समस्या रिपोर्ट करें",
+    "map": "मानचित्र एक्सप्लोरर",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क",
+    "login": "लॉगिन",
+    "admin": "एडमिन डैशबोर्ड",
+    "account": "खाता",
+    "settings": "सेटिंग्स",
+    "privacy": "गोपनीयता नीति"
+  },
+  "home": {
+    "title": "सिविक रिपोर्ट में आपका स्वागत है",
+    "subtitle": "नागरिक समस्याओं की रिपोर्ट करें और अपने समुदाय में सुधार करें",
+    "getStarted": "शुरू करें",
+    "learnMore": "और जानें",
+    "features": {
+      "reportIssues": "समस्याओं की रिपोर्ट करें",
+      "trackProgress": "प्रगति को ट्रैक करें",
+      "community": "समुदाय प्रभाव"
+    }
+  },
+  "auth": {
+    "login": "लॉगिन",
+    "signup": "साइन अप",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "confirmPassword": "पासवर्ड की पुष्टि करें",
+    "forgotPassword": "पासवर्ड भूल गए?",
+    "rememberMe": "मुझे याद रखें",
+    "loginWithGoogle": "Google से लॉगिन करें",
+    "signupWithGoogle": "Google से साइन अप करें",
+    "noAccount": "खाता नहीं है?",
+    "haveAccount": "पहले से खाता है?",
+    "resetPassword": "पासवर्ड रीसेट करें"
+  },
+  "admin": {
+    "dashboard": "एडमिन डैशबोर्ड",
+    "login": "एडमिन लॉगिन",
+    "users": "उपयोगकर्ता",
+    "issues": "समस्याएं",
+    "reports": "रिपोर्ट",
+    "analytics": "विश्लेषण",
+    "settings": "सेटिंग्स"
+  },
+  "issues": {
+    "reportIssue": "समस्या की रिपोर्ट करें",
+    "title": "शीर्षक",
+    "description": "विवरण",
+    "category": "श्रेणी",
+    "location": "स्थान",
+    "priority": "प्राथमिकता",
+    "status": "स्थिति",
+    "image": "छवि",
+    "submitReport": "रिपोर्ट सबमिट करें",
+    "categories": {
+      "infrastructure": "बुनियादी ढांचा",
+      "sanitation": "स्वच्छता",
+      "safety": "सुरक्षा",
+      "environment": "पर्यावरण",
+      "other": "अन्य"
+    },
+    "priorities": {
+      "low": "कम",
+      "medium": "मध्यम",
+      "high": "उच्च",
+      "urgent": "अत्यावश्यक"
+    },
+    "statuses": {
+      "pending": "लंबित",
+      "inProgress": "प्रगति में",
+      "resolved": "हल किया गया",
+      "closed": "बंद"
+    }
+  },
+  "footer": {
+    "about": "हमारे बारे में",
+    "contact": "संपर्क",
+    "privacy": "गोपनीयता नीति",
+    "terms": "सेवा की शर्तें",
+    "copyright": "© 2024 सिविक रिपोर्ट। सभी अधिकार सुरक्षित।"
+  }
+}

@@ -105,7 +105,7 @@ const Account: React.FC = () => {
       // In a real app, you'd query the database for actual stats
       setStats({
         reportsSubmitted: 15,
-        rewardsEarned: 250,
+        rewardsEarned: 7,
         issuesResolved: 8,
       });
     } catch (err) {

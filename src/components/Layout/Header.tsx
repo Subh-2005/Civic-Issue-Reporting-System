@@ -5,6 +5,7 @@ import { Menu, X, MapPin, Users, Shield, Bell, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { NotificationDropdown } from "@/components/Notifications/NotificationDropdown";
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
 // Knowledge base from chatbot for answering queries
 const FAQs = [
@@ -123,6 +124,9 @@ export const Header = () => {
 
             {/* Theme Toggle */}
             <ThemeToggle />
+
+            {/* Language Switcher */}
+            <LanguageSwitcher />
 
             {/* Call Button */}
             <Button

@@ -1,0 +1,107 @@
+{
+  "common": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "profile": "Profile",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information"
+  },
+  "navigation": {
+    "home": "Home",
+    "report": "Report Issue",
+    "map": "Map Explorer",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "admin": "Admin Dashboard",
+    "account": "Account",
+    "settings": "Settings",
+    "privacy": "Privacy Policy"
+  },
+  "home": {
+    "title": "Welcome to Civic Report",
+    "subtitle": "Report civic issues and help improve your community",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "features": {
+      "reportIssues": "Report Issues",
+      "trackProgress": "Track Progress",
+      "community": "Community Impact"
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me",
+    "loginWithGoogle": "Login with Google",
+    "signupWithGoogle": "Sign Up with Google",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "resetPassword": "Reset Password"
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "login": "Admin Login",
+    "users": "Users",
+    "issues": "Issues",
+    "reports": "Reports",
+    "analytics": "Analytics",
+    "settings": "Settings"
+  },
+  "issues": {
+    "reportIssue": "Report an Issue",
+    "title": "Title",
+    "description": "Description",
+    "category": "Category",
+    "location": "Location",
+    "priority": "Priority",
+    "status": "Status",
+    "image": "Image",
+    "submitReport": "Submit Report",
+    "categories": {
+      "infrastructure": "Infrastructure",
+      "sanitation": "Sanitation",
+      "safety": "Safety",
+      "environment": "Environment",
+      "other": "Other"
+    },
+    "priorities": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "statuses": {
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    }
+  },
+  "footer": {
+    "about": "About Us",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "© 2024 Civic Report. All rights reserved."
+  }
+}
