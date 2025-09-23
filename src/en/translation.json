@@ -4,5 +4,20 @@
   "warning": "Please review carefully before proceeding. Otherwise, action will be taken against you.",
   "language": "Language",
   "english": "English",
-  "hindi": "हिन्दी"
+  "hindi": "हिन्दी",
+  "badge": "SIH 2025 Government Innovation",
+  "empoweringCitizens": "Empowering Citizens",
+  "buildingCommunities": "Building Communities",
+  "citizenPortal": {
+    "title": "Citizen Portal",
+    "feature1": "Report civic issues with photos and location",
+    "feature2": "Track status of your reports",
+    "button": "Continue as Citizen"
+  },
+  "adminDashboard": {
+    "title": "Admin Dashboard",
+    "feature1": "View and manage all reported issues",
+    "feature2": "Track resolution progress and analytics",
+    "button": "Continue as Admin"
+  }
 }

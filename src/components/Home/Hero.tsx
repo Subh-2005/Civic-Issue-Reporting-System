@@ -10,7 +10,7 @@ import {
   BarChart3,
   Sparkles,
 } from "lucide-react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
 
@@ -115,17 +115,19 @@ export const Hero = () => {
               >
                 <span>Empowering Citizens</span>
                 <br />
-                <span className="gradient-hero bg-clip-text text-transparent">
-                  {displayText}
-                  {currentIndex < fullText.length && (
-                    <motion.span
-                      animate={{ opacity: [1, 0] }}
-                      transition={{ duration: 0.5, repeat: Infinity }}
-                      className="ml-1"
-                    >
-                      |
-                    </motion.span>
-                  )}
+                <span className="relative inline-block">
+                  <span className="gradient-hero bg-clip-text text-transparent relative z-10">
+                    {displayText}
+                    {currentIndex < fullText.length && (
+                      <motion.span
+                        animate={{ opacity: [1, 0] }}
+                        transition={{ duration: 0.5, repeat: Infinity }}
+                        className="ml-1"
+                      >
+                        |
+                      </motion.span>
+                    )}
+                  </span>
                 </span>
               </motion.h1>
             </motion.div>

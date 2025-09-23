@@ -30,16 +30,16 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-6">Admin Pannel</h1>
       {profile ? (
         <div>
           <p className="text-xl">
-            Welcome, <span className="font-semibold">{profile.name || profile.email}</span>
+             Public Access is Denied. Kindly Verify Your Admin Account.
           </p>
           {/* Rest of admin dashboard content */}
         </div>
       ) : (
-        <p>Loading profile...</p>
+        <p>Public Access Denied.</p>
       )}
     </div>
   );

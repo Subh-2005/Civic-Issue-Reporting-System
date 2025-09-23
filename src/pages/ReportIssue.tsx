@@ -423,7 +423,7 @@ const ReportIssue = () => {
             <Button
               className="transform transition-all duration-200 active:scale-95 hover:scale-105 hover:shadow-lg bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold px-6 py-3 rounded-full border-2 border-yellow-400 shadow-md"
             >
-              🏆 Leaderboard
+              🏆 Leaderboard of the Week
             </Button>
           </DialogTrigger>
           <DialogContent
@@ -437,7 +437,7 @@ const ReportIssue = () => {
             </DialogHeader>
             <div className="space-y-2 max-h-96 overflow-y-auto mt-4">
               {leaderboardData.length === 0 ? (
-                <p className="text-muted-foreground">No data available.</p>
+                <p className="text-muted-foreground">Data will be shown soon.....</p>
               ) : (
                 leaderboardData.map((user, index) => (
                   <div key={user.id} className="flex justify-between border-b border-muted-foreground/20 py-2">
@@ -458,7 +458,7 @@ const ReportIssue = () => {
 
         {/* Report Issue Header with Voice Assistant on right */}
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold">Reported Issues</h2>
+          <h2 className="text-2xl font-bold"></h2>
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -505,7 +505,7 @@ const ReportIssue = () => {
                     captureBtn.style.transform = "translateX(-50%)";
                     captureBtn.style.zIndex = "10000";
                     captureBtn.style.padding = "8px 16px";
-                    captureBtn.style.background = "#2563eb";
+                    captureBtn.style.background = "#1832b7ff";
                     captureBtn.style.color = "#fff";
                     captureBtn.style.borderRadius = "8px";
                     captureBtn.style.border = "none";
@@ -644,7 +644,7 @@ const ReportIssue = () => {
               <CardHeader>
                 <CardTitle className="text-2xl">Issue Details</CardTitle>
                 <CardDescription>
-                  Please provide detailed information about the civic issue
+                  Please provide detailed information about the  issue
                   you're reporting
                 </CardDescription>
               </CardHeader>

@@ -7,6 +7,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/components/Theme/ThemeProvider";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n";
 
 import Index from "./pages/Index";
 import MapExplorer from "./pages/MapExplorer";
@@ -27,49 +29,51 @@ import SettingsPage from "./pages/SettingsPage";
 const queryClient = new QueryClient();
 
 const App: React.FC = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <TooltipProvider>
-        <WelcomeModal />
-        {/* Toasts / Notifications */}
-        <Toaster />
-        <Sonner />
+  <I18nextProvider i18n={i18n}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <TooltipProvider>
+          <WelcomeModal />
+          {/* Toasts / Notifications */}
+          <Toaster />
+          <Sonner />
 
-        {/* Router */}
-        <BrowserRouter>
-          <Routes>
-            {/* Public Pages */}
-            <Route path="/" element={<Index />} />
-            <Route path="/report" element={<ReportIssue />} />
-            <Route path="/map" element={<MapExplorer />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          {/* Router */}
+          <BrowserRouter>
+            <Routes>
+              {/* Public Pages */}
+              <Route path="/" element={<Index />} />
+              <Route path="/report" element={<ReportIssue />} />
+              <Route path="/map" element={<MapExplorer />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-            {/* Admin */}
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin-login" element={<AdminLogin />} />
+              {/* Admin */}
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin-login" element={<AdminLogin />} />
 
-            {/* Account / User */}
-            <Route path="/account" element={<Account />} />
-            <Route path="/account/settings" element={<SettingsPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
+              {/* Account / User */}
+              <Route path="/account" element={<Account />} />
+              <Route path="/account/settings" element={<SettingsPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
 
-            {/* Extra Pages */}
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
+              {/* Extra Pages */}
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
 
-            {/* Catch-all */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              {/* Catch-all */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
 
-          {/* Global Chatbot */}
-          <Chatbot />
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+            {/* Global Chatbot */}
+            <Chatbot />
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  </I18nextProvider>
 );
 
 export default App;

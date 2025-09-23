@@ -1,0 +1,30 @@
+/* Liquid Glass Effect for Header */
+
+/* Enhanced liquid glass effect */
+.liquid-glass-header {
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.liquid-glass-header:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .liquid-glass-header {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .liquid-glass-header:hover {
+    background: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  }
+}
