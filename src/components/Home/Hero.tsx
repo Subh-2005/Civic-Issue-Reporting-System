@@ -185,49 +185,6 @@ export const Hero = () => {
                 </motion.div>
               </motion.div>
             </motion.div>
-
-            {/* Visual Explanation - Simplified */}
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, delay: 0.4 }}
-              className="relative"
-              aria-label="How It Works"
-            >
-              <div className="glass-effect rounded-3xl p-10 shadow-[var(--shadow-elevated)]">
-                <h3 className="text-3xl font-bold text-foreground mb-8 text-center">
-                  How It Works
-                </h3>
-                <div className="space-y-6">
-                  {[
-                    { icon: Camera, title: "Take a Photo", color: "primary" },
-                    {
-                      icon: CheckCircle,
-                      title: "Track Progress",
-                      color: "success",
-                    },
-                  ].map((step, index) => (
-                    <motion.div
-                      key={index}
-                      className="flex items-center space-x-6"
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 1 + index * 0.2, duration: 0.6 }}
-                      role="listitem"
-                    >
-                      <div
-                        className={`h-16 w-16 rounded-2xl bg-${step.color}/20 flex items-center justify-center`}
-                      >
-                        <step.icon className={`h-8 w-8 text-${step.color}`} aria-hidden="true" />
-                      </div>
-                      <h4 className="font-bold text-foreground text-lg">
-                        {step.title}
-                      </h4>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
           </div>
         </div>
 
