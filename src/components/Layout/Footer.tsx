@@ -41,7 +41,7 @@ const socialLinks = [
   {
     Icon: Linkedin,
     color: "blue",
-    href: "https://www.linkedin.com/in/sumandey7684",
+    href: "https://www.linkedin.com/in/subhasish-rath-926b902a4",
   },
   { Icon: Github, color: "slate", href: "https://www.github.com/sumandey7684" },
   { Icon: Mail, color: "red", href: "#" },
