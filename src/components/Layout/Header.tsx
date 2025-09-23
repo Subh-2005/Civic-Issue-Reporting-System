@@ -7,7 +7,6 @@ import { NotificationDropdown } from "@/components/Notifications/NotificationDro
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
-import "./Header.css";
 
 // Knowledge base from chatbot for answering queries
 const FAQs = [
@@ -33,7 +32,6 @@ export const Header = () => {
   const { t } = useTranslation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isListening, setIsListening] = useState(false);
-
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
@@ -77,8 +75,8 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border liquid-glass-header">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo & Brand */}
           <div className="flex items-center space-x-3">
@@ -95,25 +93,30 @@ export const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {[
-              { key: "report", href: "/report", label: t("navigation.report") },
-              { key: "map", href: "/map", label: t("navigation.map") },
-              { key: "about", href: "/about", label: t("navigation.about") },
-              { key: "contact", href: "/contact", label: t("navigation.contact") }
-            ].map((item, index) => (
-              <motion.div
-                key={item.key}
-                className="relative"
-                whileHover={{ scale: 1.05 }}
-              >
-                <a
-                  href={item.href}
-                  className="text-foreground hover:text-primary transition-colors font-medium"
-                >
-                  {item.label}
-                </a>
-              </motion.div>
-            ))}
+            <a
+              href="/report"
+              className="text-foreground hover:text-primary transition-colors font-medium"
+            >
+              {t("navigation.report")}
+            </a>
+            <a
+              href="/map"
+              className="text-foreground hover:text-primary transition-colors font-medium"
+            >
+              {t("navigation.map")}
+            </a>
+            <a
+              href="/about"
+              className="text-foreground hover:text-primary transition-colors font-medium"
+            >
+              {t("navigation.about")}
+            </a>
+            <a
+              href="/contact"
+              className="text-foreground hover:text-primary transition-colors font-medium"
+            >
+              {t("navigation.contact")}
+            </a>
           </nav>
 
           {/* Actions */}
